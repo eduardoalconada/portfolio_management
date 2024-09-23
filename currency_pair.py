@@ -26,6 +26,3 @@ def pair(base, quote):
         print(f"An error occurred while fetching data for {base}/{quote}: {e}")
         return None
 
-# Example usage
-rate = pair("EUR", "USD")
-print(rate)
