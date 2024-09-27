@@ -1,32 +1,66 @@
-{
-    "Gold": [
-        "GC=F",
-        2366.64,
-        0.211075
-    ],
-    "Silver": [
-        "SI=F",
-        28.12,
-        0
-    ],
-    "Platinum": [
-        "PL=F",
-        877.99,
-        0
-    ],
-    "Palladium": [
-        "PA=F",
-        960.79,
-        0
-    ],
-    "Copper": [
-        "HG=F",
-        3.88,
-        0
-    ],
-    "Aluminum": [
-        "ALI=F",
-        2177.26,
-        0
-    ]
-}
+[
+    {
+        "Name": "Crude Oil",
+        "Ticker": "CL=F"
+    },
+    {
+        "Name": "Brent Crude Oil",
+        "Ticker": "BZ=F"
+    },
+    {
+        "Name": "Heating Oil",
+        "Ticker": "HO=F"
+    },
+    {
+        "Name": "Natural Gas",
+        "Ticker": "NG=F"
+    },
+    {
+        "Name": "Gold",
+        "Ticker": "GC=F"
+    },
+    {
+        "Name": "Silver",
+        "Ticker": "SI=F"
+    },
+    {
+        "Name": "Platinum",
+        "Ticker": "PL=F"
+    },
+    {
+        "Name": "Palladium",
+        "Ticker": "PA=F"
+    },
+    {
+        "Name": "Copper",
+        "Ticker": "HG=F"
+    },
+    {
+        "Name": "Soybeans",
+        "Ticker": "ZS=F"
+    },
+    {
+        "Name": "Corn",
+        "Ticker": "ZC=F"
+    },
+    {
+        "Name": "Cocoa",
+        "Ticker": "CC=F"
+    },
+    {
+        "Name": "Coffee",
+        "Ticker": "KC=F"
+    },
+    {
+        "Name": "Cotton",
+        "Ticker": "CT=F"
+    },
+    {
+        "Name": "RBOB Gasoline",
+        "Ticker": "RB=F"
+    },
+    {
+        "Name": "Lumber",
+        "Ticker": "LBR=F"
+    }
+]
