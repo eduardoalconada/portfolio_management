@@ -13,10 +13,10 @@ if action == 'c':
     while component != "exit" and component != "e" and component != 'q':
         component = input().lower()
         if component == "commodity":
-            search_component()
+            search_component('components\commodities.json')
         elif component == "crypto":
-            search_component()
+            search_component('components\crypto.json')
         elif component == "shares":
-            search_component()
+            search_component('components\shares.json')
         else:
             print("Type commodity, crypto or shares. If you want to exit type exit, e or q")
