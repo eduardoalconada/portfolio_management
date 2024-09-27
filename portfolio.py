@@ -1,4 +1,5 @@
 import yfinance as yf
+from fetch_item import search_component
 
 
 action = input("""Which action you want to do:
@@ -12,10 +13,10 @@ if action == 'c':
     while component != "exit" and component != "e" and component != 'q':
         component = input().lower()
         if component == "commodity":
-            upd_commodity()
+            search_component()
         elif component == "crypto":
-            upd_crypto()
+            search_component()
         elif component == "shares":
-            upd_shares()
+            search_component()
         else:
             print("Type commodity, crypto or shares. If you want to exit type exit, e or q")

@@ -2,30 +2,28 @@ import json
 import os
 from rapidfuzz import process, fuzz
 
-# File name for shares data
-json_file = 'components/shares.json'
 
 # Load shares data from the JSON file
-def load_shares():
-    if os.path.exists(json_file):
-        with open(json_file, 'r') as f:
+def load_data(component_json):
+    if os.path.exists(component_json):
+        with open(component_json, 'r') as f:
             return json.load(f)
     else:
-        print(f"Error: {json_file} not found.")
+        print(f"Error: {component_json} not found.")
         return []
 
 # Function to find the closest matching company name or ticker
-def find_company_or_ticker(query, shares_data):
+def find_item_or_ticker(query, component_data):
     query_lower = query.strip().lower()
     
     # Step 1: Check for an exact ticker match
-    for entry in shares_data:
+    for entry in component_data:
         if entry["Ticker"].lower() == query_lower:
             return entry["Name"], entry["Ticker"]
 
-    # Step 2: Fuzzy matching for company name
-    company_names = [entry["Name"] for entry in shares_data]
-    closest_match = process.extractOne(query, company_names, scorer=fuzz.WRatio)
+    # Step 2: Fuzzy matching for item name
+    item_names = [entry["Name"] for entry in component_data]
+    closest_match = process.extractOne(query, item_names, scorer=fuzz.WRatio)
     
     if closest_match:
         matched_name = closest_match[0]
@@ -33,7 +31,7 @@ def find_company_or_ticker(query, shares_data):
 
         # Return if the match score is reasonably high (say 60 or more)
         if match_score >= 60:
-            for entry in shares_data:
+            for entry in component_data:
                 if entry["Name"].lower() == matched_name.lower():
                     return entry["Name"], entry["Ticker"]
         else:
@@ -44,22 +42,23 @@ def find_company_or_ticker(query, shares_data):
         return None, None
 
 # Main function to interact with the user
-def main():
+def search_component(component_json):
     # Load the shares data
-    shares_data = load_shares()
+    component_data = load_data(component_json)
     
     # Ask the user for the company name or ticker input
-    query = input("Enter the company name or ticker: ").strip()
+    query = input("Enter the item name or ticker: ").strip()
 
     # Find the ticker or company name
-    company_name, ticker = find_company_or_ticker(query, shares_data)
+    item_name, ticker = find_item_or_ticker(query, component_data)
 
     # Output the result
-    if company_name and ticker:
-        print(f"The company is: {company_name}, Ticker: {ticker}")
+    if item_name and ticker:
+        print(f"The item is: {item_name}, Ticker: {ticker}")
     else:
-        print("Could not find a matching company or ticker.")
+        print("Could not find a matching item or ticker.")
 
 # Run the program
 if __name__ == "__main__":
-    main()
+    search_component('components/shares.json')
+    search_component('components/commodities.json')
