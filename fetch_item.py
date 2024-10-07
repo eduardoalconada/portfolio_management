@@ -42,7 +42,7 @@ def find_item_or_ticker(query, component_data):
         return None, None
 
 # Main function to interact with the user
-def search_component(component_json):
+def search_asset(component_json):
     # Load the shares data
     component_data = load_data(component_json)
     
@@ -57,8 +57,10 @@ def search_component(component_json):
         print(f"The item is: {item_name}, Ticker: {ticker}")
     else:
         print("Could not find a matching item or ticker.")
+    
+    return item_name, ticker
 
 # Run the program
 if __name__ == "__main__":
-    search_component('components/shares.json')
-    search_component('components/commodities.json')
+    search_asset('components/shares.json')
+    search_asset('components/commodities.json')
