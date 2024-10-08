@@ -70,7 +70,7 @@ def prompt_transfer_liquidity(liquidity_data):
         print("Invalid currency selection.")
         return liquidity_data
 
-    base_amount = int(input(f"Enter the amount of {base_currency} to exchange: "))
+    base_amount = float(input(f"Enter the amount of {base_currency} to exchange: "))
 
     if base_amount > liquidity_data[f"LIQ-{base_currency}"]:
         print(f"Insufficient {base_currency} liquidity.")
@@ -105,7 +105,7 @@ def prompt_update_liquidity(liquidity_data):
         print("Invalid option selected.")
         return liquidity_data
 
-    amount = int(input(f"Enter the amount to {('increase' if action == 'i' else 'reduce')}: "))
+    amount = float(input(f"Enter the amount to {('increase' if action == 'i' else 'reduce')}: "))
 
     if action == 'r' and amount > liquidity_data[f"LIQ-{currency}"]:
         print(f"Insufficient {currency} liquidity.")
