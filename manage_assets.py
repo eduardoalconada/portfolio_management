@@ -2,7 +2,7 @@ import yfinance as yf
 import json
 from manage_liquidity import pair
 
-PORTFOLIO_FILE_PATH = 'components/portfolio.json'
+PORTFOLIO_FILE_PATH = 'assets/portfolio.json'
 
 def load_portfolio_json() -> dict:
     """Loads the portfolio data from the JSON file."""

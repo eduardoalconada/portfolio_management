@@ -6,7 +6,7 @@ from manage_liquidity import check_liquidity_available, load_liquidity_json, sav
 
 
 CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CNH"]
-PORTFOLIO_FILE_PATH = 'components/portfolio.json'
+PORTFOLIO_FILE_PATH = 'assets/portfolio.json'
 
 
 def save_portfolio_data(portfolio_data):

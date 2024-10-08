@@ -3,7 +3,7 @@ import json
 import os
 
 # File name
-json_file = 'components/commodities.json'
+json_file = 'assets/commodities.json'
 
 # List of commodity tickers and names
 commodities = {

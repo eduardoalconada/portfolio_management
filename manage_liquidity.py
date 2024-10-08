@@ -3,7 +3,7 @@ import json
 
 # Constants for currencies
 CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CNH"]
-LIQUIDITY_FILE_PATH = 'components/liquidity.json'
+LIQUIDITY_FILE_PATH = 'assets/liquidity.json'
 
 
 def check_liquidity_available(currency):

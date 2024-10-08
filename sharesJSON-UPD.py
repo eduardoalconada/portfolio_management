@@ -3,7 +3,7 @@ import json
 import os
 
 # File name
-json_file = 'components/shares.json'
+json_file = 'assets/shares.json'
 
 def shares_upd():
 
