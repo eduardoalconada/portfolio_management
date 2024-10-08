@@ -1,3 +1,198 @@
-{
-    
-}
+[
+    {
+        "Name": "Bitcoin",
+        "Ticker": "BTC"
+    },
+    {
+        "Name": "Ethereum",
+        "Ticker": "ETH"
+    },
+    {
+        "Name": "Tether",
+        "Ticker": "USDT"
+    },
+    {
+        "Name": "BNB",
+        "Ticker": "BNB"
+    },
+    {
+        "Name": "USD Coin",
+        "Ticker": "USDC"
+    },
+    {
+        "Name": "XRP",
+        "Ticker": "XRP"
+    },
+    {
+        "Name": "Solana",
+        "Ticker": "SOL"
+    },
+    {
+        "Name": "Cardano",
+        "Ticker": "ADA"
+    },
+    {
+        "Name": "Dogecoin",
+        "Ticker": "DOGE"
+    },
+    {
+        "Name": "TRON",
+        "Ticker": "TRX"
+    },
+    {
+        "Name": "Toncoin",
+        "Ticker": "TON"
+    },
+    {
+        "Name": "Polygon",
+        "Ticker": "MATIC"
+    },
+    {
+        "Name": "Polkadot",
+        "Ticker": "DOT"
+    },
+    {
+        "Name": "Litecoin",
+        "Ticker": "LTC"
+    },
+    {
+        "Name": "Shiba Inu",
+        "Ticker": "SHIB"
+    },
+    {
+        "Name": "Avalanche",
+        "Ticker": "AVAX"
+    },
+    {
+        "Name": "Wrapped Bitcoin",
+        "Ticker": "WBTC"
+    },
+    {
+        "Name": "Dai",
+        "Ticker": "DAI"
+    },
+    {
+        "Name": "Chainlink",
+        "Ticker": "LINK"
+    },
+    {
+        "Name": "Uniswap",
+        "Ticker": "UNI"
+    },
+    {
+        "Name": "Stellar",
+        "Ticker": "XLM"
+    },
+    {
+        "Name": "Binance USD",
+        "Ticker": "BUSD"
+    },
+    {
+        "Name": "TrueUSD",
+        "Ticker": "TUSD"
+    },
+    {
+        "Name": "Monero",
+        "Ticker": "XMR"
+    },
+    {
+        "Name": "Bitcoin Cash",
+        "Ticker": "BCH"
+    },
+    {
+        "Name": "OKB",
+        "Ticker": "OKB"
+    },
+    {
+        "Name": "Hedera",
+        "Ticker": "HBAR"
+    },
+    {
+        "Name": "Arbitrum",
+        "Ticker": "ARB"
+    },
+    {
+        "Name": "Cronos",
+        "Ticker": "CRO"
+    },
+    {
+        "Name": "VeChain",
+        "Ticker": "VET"
+    },
+    {
+        "Name": "NEAR Protocol",
+        "Ticker": "NEAR"
+    },
+    {
+        "Name": "Aptos",
+        "Ticker": "APT"
+    },
+    {
+        "Name": "Quant",
+        "Ticker": "QNT"
+    },
+    {
+        "Name": "Algorand",
+        "Ticker": "ALGO"
+    },
+    {
+        "Name": "Internet Computer",
+        "Ticker": "ICP"
+    },
+    {
+        "Name": "The Graph",
+        "Ticker": "GRT"
+    },
+    {
+        "Name": "Filecoin",
+        "Ticker": "FIL"
+    },
+    {
+        "Name": "Lido DAO",
+        "Ticker": "LDO"
+    },
+    {
+        "Name": "Synthetix",
+        "Ticker": "SNX"
+    },
+    {
+        "Name": "Immutable",
+        "Ticker": "IMX"
+    },
+    {
+        "Name": "Frax",
+        "Ticker": "FRAX"
+    },
+    {
+        "Name": "Aave",
+        "Ticker": "AAVE"
+    },
+    {
+        "Name": "EOS",
+        "Ticker": "EOS"
+    },
+    {
+        "Name": "MultiversX",
+        "Ticker": "EGLD"
+    },
+    {
+        "Name": "Theta Network",
+        "Ticker": "THETA"
+    },
+    {
+        "Name": "Stacks",
+        "Ticker": "STX"
+    },
+    {
+        "Name": "Axie Infinity",
+        "Ticker": "AXS"
+    },
+    {
+        "Name": "Tezos",
+        "Ticker": "XTZ"
+    },
+    {
+        "Name": "Decentraland",
+        "Ticker": "MANA"
+    }
+]
