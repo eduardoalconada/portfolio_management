@@ -6,17 +6,18 @@ CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CNH"]
 LIQUIDITY_FILE_PATH = 'assets/liquidity.json'
 
 
-def calculate_total_liquidity():
+def calculate_total_liquidity(quote_currency):
 
-    currency_to_pair = 'USD'
     total_liquidity = 0
 
     liquidity = load_liquidity_json()
 
     for currency, amount in liquidity.items():
-        if currency.startswith('LIQ-'):
+        if currency.startswith('LIQ-') and amount > 0:
             currency = currency[4:]
-            pairity = pair(currency, currency_to_pair)
+            print(currency)
+            print(quote_currency)
+            pairity = pair(currency, quote_currency)
             total_liquidity += amount*pairity
 
     return round(total_liquidity, 2)
@@ -31,6 +32,8 @@ def check_liquidity_available(currency):
 def pair(base, quote):
     """Fetches the exchange rate between two currencies."""
     try:
+        if base == quote:
+            return 1
         # Fetch the currency pair data from Yahoo Finance
         ticker = yf.Ticker(f"{base}{quote}=X")
         data = ticker.history(period="1d")
@@ -134,8 +137,11 @@ def update_liquidity():
     liquidity_data = load_liquidity_json()
 
     # Update liquidity amounts and transfer between currencies
-    liquidity_data = prompt_update_liquidity(liquidity_data)
-    liquidity_data = prompt_transfer_liquidity(liquidity_data)
+    action = input("Do you want to update a currency or transfer from one currency to another? (u/t): ").lower()
+    if action == 'u':
+        liquidity_data = prompt_update_liquidity(liquidity_data)
+    elif action == 't':
+        liquidity_data = prompt_transfer_liquidity(liquidity_data)
 
     # Save the updated liquidity data
     save_liquidity_data(liquidity_data)

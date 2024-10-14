@@ -1,198 +1,198 @@
 [
     {
         "Name": "Bitcoin",
-        "Ticker": "BTC"
+        "Ticker": "BTC-USD"
     },
     {
         "Name": "Ethereum",
-        "Ticker": "ETH"
+        "Ticker": "ETH-USD"
     },
     {
         "Name": "Tether",
-        "Ticker": "USDT"
+        "Ticker": "USDT-USD"
     },
     {
         "Name": "BNB",
-        "Ticker": "BNB"
+        "Ticker": "BNB-USD"
     },
     {
         "Name": "USD Coin",
-        "Ticker": "USDC"
+        "Ticker": "USDC-USD"
     },
     {
         "Name": "XRP",
-        "Ticker": "XRP"
+        "Ticker": "XRP-USD"
     },
     {
         "Name": "Solana",
-        "Ticker": "SOL"
+        "Ticker": "SOL-USD"
     },
     {
         "Name": "Cardano",
-        "Ticker": "ADA"
+        "Ticker": "ADA-USD"
     },
     {
         "Name": "Dogecoin",
-        "Ticker": "DOGE"
+        "Ticker": "DOGE-USD"
     },
     {
         "Name": "TRON",
-        "Ticker": "TRX"
+        "Ticker": "TRX-USD"
     },
     {
         "Name": "Toncoin",
-        "Ticker": "TON"
+        "Ticker": "TON-USD"
     },
     {
         "Name": "Polygon",
-        "Ticker": "MATIC"
+        "Ticker": "MATIC-USD"
     },
     {
         "Name": "Polkadot",
-        "Ticker": "DOT"
+        "Ticker": "DOT-USD"
     },
     {
         "Name": "Litecoin",
-        "Ticker": "LTC"
+        "Ticker": "LTC-USD"
     },
     {
         "Name": "Shiba Inu",
-        "Ticker": "SHIB"
+        "Ticker": "SHIB-USD"
     },
     {
         "Name": "Avalanche",
-        "Ticker": "AVAX"
+        "Ticker": "AVAX-USD"
     },
     {
         "Name": "Wrapped Bitcoin",
-        "Ticker": "WBTC"
+        "Ticker": "WBTC-USD"
     },
     {
         "Name": "Dai",
-        "Ticker": "DAI"
+        "Ticker": "DAI-USD"
     },
     {
         "Name": "Chainlink",
-        "Ticker": "LINK"
+        "Ticker": "LINK-USD"
     },
     {
         "Name": "Uniswap",
-        "Ticker": "UNI"
+        "Ticker": "UNI-USD"
     },
     {
         "Name": "Stellar",
-        "Ticker": "XLM"
+        "Ticker": "XLM-USD"
     },
     {
         "Name": "Binance USD",
-        "Ticker": "BUSD"
+        "Ticker": "BUSD-USD"
     },
     {
         "Name": "TrueUSD",
-        "Ticker": "TUSD"
+        "Ticker": "TUSD-USD"
     },
     {
         "Name": "Monero",
-        "Ticker": "XMR"
+        "Ticker": "XMR-USD"
     },
     {
         "Name": "Bitcoin Cash",
-        "Ticker": "BCH"
+        "Ticker": "BCH-USD"
     },
     {
         "Name": "OKB",
-        "Ticker": "OKB"
+        "Ticker": "OKB-USD"
     },
     {
         "Name": "Hedera",
-        "Ticker": "HBAR"
+        "Ticker": "HBAR-USD"
     },
     {
         "Name": "Arbitrum",
-        "Ticker": "ARB"
+        "Ticker": "ARB-USD"
     },
     {
         "Name": "Cronos",
-        "Ticker": "CRO"
+        "Ticker": "CRO-USD"
     },
     {
         "Name": "VeChain",
-        "Ticker": "VET"
+        "Ticker": "VET-USD"
     },
     {
         "Name": "NEAR Protocol",
-        "Ticker": "NEAR"
+        "Ticker": "NEAR-USD"
     },
     {
         "Name": "Aptos",
-        "Ticker": "APT"
+        "Ticker": "APT-USD"
     },
     {
         "Name": "Quant",
-        "Ticker": "QNT"
+        "Ticker": "QNT-USD"
     },
     {
         "Name": "Algorand",
-        "Ticker": "ALGO"
+        "Ticker": "ALGO-USD"
     },
     {
         "Name": "Internet Computer",
-        "Ticker": "ICP"
+        "Ticker": "ICP-USD"
     },
     {
         "Name": "The Graph",
-        "Ticker": "GRT"
+        "Ticker": "GRT-USD"
     },
     {
         "Name": "Filecoin",
-        "Ticker": "FIL"
+        "Ticker": "FIL-USD"
     },
     {
         "Name": "Lido DAO",
-        "Ticker": "LDO"
+        "Ticker": "LDO-USD"
     },
     {
         "Name": "Synthetix",
-        "Ticker": "SNX"
+        "Ticker": "SNX-USD"
     },
     {
         "Name": "Immutable",
-        "Ticker": "IMX"
+        "Ticker": "IMX-USD"
     },
     {
         "Name": "Frax",
-        "Ticker": "FRAX"
+        "Ticker": "FRAX-USD"
     },
     {
         "Name": "Aave",
-        "Ticker": "AAVE"
+        "Ticker": "AAVE-USD"
     },
     {
         "Name": "EOS",
-        "Ticker": "EOS"
+        "Ticker": "EOS-USD"
     },
     {
         "Name": "MultiversX",
-        "Ticker": "EGLD"
+        "Ticker": "EGLD-USD"
     },
     {
         "Name": "Theta Network",
-        "Ticker": "THETA"
+        "Ticker": "THETA-USD"
     },
     {
         "Name": "Stacks",
-        "Ticker": "STX"
+        "Ticker": "STX-USD"
     },
     {
         "Name": "Axie Infinity",
-        "Ticker": "AXS"
+        "Ticker": "AXS-USD"
     },
     {
         "Name": "Tezos",
-        "Ticker": "XTZ"
+        "Ticker": "XTZ-USD"
     },
     {
         "Name": "Decentraland",
-        "Ticker": "MANA"
+        "Ticker": "MANA-USD"
     }
 ]

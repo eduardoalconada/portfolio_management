@@ -4,7 +4,7 @@ import yfinance as yf
 import json
 import time
 from manage_assets import check_cuantity, get_latest_price, load_portfolio_json, check_price
-from manage_liquidity import check_liquidity_available, load_liquidity_json, save_liquidity_data, pair, calculate_total_liquidity
+from manage_liquidity import check_liquidity_available, load_liquidity_json, save_liquidity_data, pair, calculate_total_liquidity, display_currency_options
 
 
 CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CNH"]
@@ -63,7 +63,7 @@ def sell_item(item_name, ticker):
     cuantity_to_sell = None
     while cuantity_to_sell is None:
         try:
-            cuantity_to_sell = int(input(f"How much {item_name} you want to sell? "))
+            cuantity_to_sell = float(input(f"How much {item_name} you want to sell? "))
             if cuantity_to_sell > cuantity_item:
                 print(f"You've got {cuantity_item} units, you don't have enough to sell {cuantity_to_sell} units.")
                 cuantity_to_sell = None
@@ -131,7 +131,7 @@ def buy_item(item_name, ticker):
             return
 
         try:
-            amount_to_buy = int(user_input)
+            amount_to_buy = float(user_input)
             
             # Comprobar si amount_to_buy es válido
             if amount_to_buy <= 0:
@@ -145,7 +145,7 @@ def buy_item(item_name, ticker):
             print("Invalid input. Please enter a number or 'e' to exit.")
 
     
-    total_value = current_item_price * amount_to_buy
+    total_value = round(current_item_price * amount_to_buy, 2)
     confirm = input(f"You're purchasing {amount_to_buy} units of {ticker} at {current_item_price} {currency} per unit. Total: {total_value} {currency}. Confirm (y/n)? ").lower()
     if confirm == 'y':
         execute_operation(ticker, amount_to_buy, -total_value, currency)
@@ -166,11 +166,12 @@ def update_asset(item_name, ticker):
 
 def calculate_total_value():
 
+    quote_currency = input("In which currency do you want to calculate your total value? (EUR, USD, GBP, JPY, CHF, CNH) ").upper()
     total_value = 0
     portfolio = load_portfolio_json()
 
     for ticker, cuantity in portfolio.items():
-        price = check_price(ticker, 'USD')
+        price = check_price(ticker, quote_currency)
 
         if price is None:
             print(f"Error retrieving price for {ticker}.")
@@ -179,13 +180,13 @@ def calculate_total_value():
         total_value += cuantity * price
 
     total_value = round(total_value, 2)
-    print(f"Your total value of your assets is {total_value} USD.")
+    print(f"Your total value of your assets is {total_value} {quote_currency}.")
 
-    total_liquidity = calculate_total_liquidity()
-    print(f"Your total liquidity is {total_liquidity} USD.")
+    total_liquidity = calculate_total_liquidity(quote_currency)
+    print(f"Your total liquidity is {total_liquidity} {quote_currency}.")
 
     total_value += total_liquidity
 
     total_value = round(total_value, 2)
-    print(f"Your net worth is {total_value} USD.")
+    print(f"Your net worth is {total_value} {quote_currency}.")
     return total_value
