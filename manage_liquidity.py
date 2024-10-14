@@ -6,6 +6,21 @@ CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CNH"]
 LIQUIDITY_FILE_PATH = 'assets/liquidity.json'
 
 
+def calculate_total_liquidity():
+
+    currency_to_pair = 'USD'
+    total_liquidity = 0
+
+    liquidity = load_liquidity_json()
+
+    for currency, amount in liquidity.items():
+        if currency.startswith('LIQ-'):
+            currency = currency[4:]
+            pairity = pair(currency, currency_to_pair)
+            total_liquidity += amount*pairity
+
+    return round(total_liquidity, 2)
+
 def check_liquidity_available(currency):
     try:
         return load_liquidity_json()[f"LIQ-{currency}"]
@@ -26,7 +41,7 @@ def pair(base, quote):
             return None
         
         # Return the latest closing price
-        return data['Close'].iloc[-1]
+        return round(data['Close'].iloc[-1], 2)
 
     except IndexError:
         print(f"Error: Could not retrieve the latest price for {base}/{quote}.")

@@ -1,8 +1,10 @@
+"""Manages the portfolio and liquidity files."""
+
 import yfinance as yf
 import json
 import time
 from manage_assets import check_cuantity, get_latest_price, load_portfolio_json, check_price
-from manage_liquidity import check_liquidity_available, load_liquidity_json, save_liquidity_data, pair
+from manage_liquidity import check_liquidity_available, load_liquidity_json, save_liquidity_data, pair, calculate_total_liquidity
 
 
 CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CNH"]
@@ -161,3 +163,29 @@ def update_asset(item_name, ticker):
         buy_item(item_name, ticker)
     elif buy_or_sell == 's':
         sell_item(item_name, ticker)
+
+def calculate_total_value():
+
+    total_value = 0
+    portfolio = load_portfolio_json()
+
+    for ticker, cuantity in portfolio.items():
+        price = check_price(ticker, 'USD')
+
+        if price is None:
+            print(f"Error retrieving price for {ticker}.")
+            continue
+
+        total_value += cuantity * price
+
+    total_value = round(total_value, 2)
+    print(f"Your total value of your assets is {total_value} USD.")
+
+    total_liquidity = calculate_total_liquidity()
+    print(f"Your total liquidity is {total_liquidity} USD.")
+
+    total_value += total_liquidity
+
+    total_value = round(total_value, 2)
+    print(f"Your net worth is {total_value} USD.")
+    return total_value

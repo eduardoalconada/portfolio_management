@@ -1,5 +1,5 @@
 import yfinance as yf
-from manage_portfolio import update_asset
+from manage_portfolio import update_asset, calculate_total_value
 from manage_liquidity import update_liquidity
 from fetch_item import search_asset
 
@@ -35,7 +35,7 @@ while action != 'e':
         update_liquidity()
     
     elif action == 'v':
-        print("Not implemented yet")
+        calculate_total_value()
     
     elif action == 'r':
         print("Not implemented yet") 

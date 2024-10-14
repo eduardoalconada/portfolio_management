@@ -20,7 +20,7 @@ def get_latest_price(ticker):
     """Fetch the latest price for a given ticker from Yahoo Finance."""
     try:
         asset = yf.Ticker(ticker)
-        return asset.history(period="1d")['Close'].iloc[-1]  # Get the last closing price  
+        return round(asset.history(period="1d")['Close'].iloc[-1], 2)  # Get the last closing price  
     except Exception as e:
         print(f"Error fetching data for {ticker}: {e}")
         return None
