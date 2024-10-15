@@ -21,7 +21,7 @@ def save_portfolio_data(portfolio_data):
         
 
 
-def execute_operation(ticker, cuantity, total_value, currency):
+def execute_operation(ticker, cuantity, total_value, currency, asset_type):
     """
     Updates the portfolio and liquidity files after a sale.
 
@@ -37,10 +37,10 @@ def execute_operation(ticker, cuantity, total_value, currency):
     liquidity = load_liquidity_json()
 
     # Update the quantity in the portfolio
-    if ticker in portfolio:
-        portfolio[ticker] += cuantity  # Si existe, añade la cantidad
+    if ticker in portfolio[asset_type]:
+        portfolio[asset_type][ticker] += cuantity  # Si existe, añade la cantidad
     else:
-        portfolio[ticker] = cuantity  # Si no existe, inicializa con la cantidad
+        portfolio[asset_type][ticker] = cuantity  # Si no existe, inicializa con la cantidad
     liquidity[f"LIQ-{currency}"] += total_value
 
     # Save the updated portfolio
@@ -51,10 +51,10 @@ def execute_operation(ticker, cuantity, total_value, currency):
 
 
 
-def sell_item(item_name, ticker):
+def sell_item(item_name, ticker, asset_type):
     """Sell an item in your portfolio."""
 
-    cuantity_item = check_cuantity(ticker)
+    cuantity_item = check_cuantity(ticker, asset_type)
 
     if cuantity_item == 0:
         print(f"You don't have {item_name} in your portfolio")
@@ -88,13 +88,13 @@ def sell_item(item_name, ticker):
     # Process the sale
     confirm = input(f"You're selling {cuantity_to_sell} units of {item_name} at {price_per_unit} {currency} per unit. Total: {total_value} {currency}. Confirm (y/n)? ").lower()
     if confirm == 'y':
-        execute_operation(ticker, -cuantity_to_sell, total_value, currency)
+        execute_operation(ticker, -cuantity_to_sell, total_value, currency, asset_type)
         print(f"Successfully sold {cuantity_to_sell} units of {item_name} for {total_value} {currency}.")
     else:
         print("Sale cancelled.")
 
 
-def buy_item(item_name, ticker):
+def buy_item(item_name, ticker, asset_type):
     
     """
     Interactively asks the user for a currency to buy an item in.
@@ -148,45 +148,73 @@ def buy_item(item_name, ticker):
     total_value = round(current_item_price * amount_to_buy, 2)
     confirm = input(f"You're purchasing {amount_to_buy} units of {ticker} at {current_item_price} {currency} per unit. Total: {total_value} {currency}. Confirm (y/n)? ").lower()
     if confirm == 'y':
-        execute_operation(ticker, amount_to_buy, -total_value, currency)
+        execute_operation(ticker, amount_to_buy, -total_value, currency, asset_type)
         print(f"Successfully bought {amount_to_buy} units of {item_name} for {total_value} {currency}.")
     else:
         print("Sale cancelled.")   
     
     
 
-def update_asset(item_name, ticker):
+def update_asset(item_name, ticker, asset_type):
 
-    buy_or_sell = input(f"Do you want to buy or sell {item_name}? (b/s)").lower()
+    buy_or_sell = input(f"Do you want to buy {item_name}, sell {item_name} or cancel? (b/s/c)").lower()
 
     if buy_or_sell == 'b':
-        buy_item(item_name, ticker)
+        buy_item(item_name, ticker, asset_type)
     elif buy_or_sell == 's':
-        sell_item(item_name, ticker)
+        sell_item(item_name, ticker, asset_type)
+    elif buy_or_sell == 'c':
+        print("Operation cancelled.")
 
 def calculate_total_value():
-
+    """
+        total_value: dictionary with all values of every type of asset
+        total_type: the total value of all items in the asset type
+        total_item: the total value of an item (an asset)
+    """
     quote_currency = input("In which currency do you want to calculate your total value? (EUR, USD, GBP, JPY, CHF, CNH) ").upper()
-    total_value = 0
+    total_value = {
+    "Commodities": {},
+    "Shares": {},
+    "Crypto": {},
+    "Liquidity": {},
+    "Total": 0
+}
     portfolio = load_portfolio_json()
 
-    for ticker, cuantity in portfolio.items():
-        price = check_price(ticker, quote_currency)
+    # Iterate over each asset type (e.g., 'stocks', 'crypto')
+    for asset_type, assets in portfolio.items():
+        
 
-        if price is None:
-            print(f"Error retrieving price for {ticker}.")
-            continue
+        total_type = 0
 
-        total_value += cuantity * price
+        # Iterate over each item in the asset type
+        for ticker, quantity in assets.items():
+            price = check_price(ticker, quote_currency)
 
-    total_value = round(total_value, 2)
-    print(f"Your total value of your assets is {total_value} {quote_currency}.")
+            if price is None:
+                print(f"Error retrieving price for {ticker}.")
+                continue
 
-    total_liquidity = calculate_total_liquidity(quote_currency)
-    print(f"Your total liquidity is {total_liquidity} {quote_currency}.")
+            # The total value of an item is calculated and summed to the total value of the asset type
+            total_item = quantity * price
+            total_type += total_item
 
-    total_value += total_liquidity
+            total_value[asset_type][ticker] = round(total_item, 2)
+        total_value[asset_type]["Total"] = round(total_type, 2)
+        print(f"Your total value of your {asset_type} is {round(total_type, 2)} {quote_currency}.")
+        total_value["Total"] += round(total_type, 2)
 
-    total_value = round(total_value, 2)
-    print(f"Your net worth is {total_value} {quote_currency}.")
-    return total_value
+    print(f"Your total value of your Assets is {total_value["Total"]} {quote_currency}.")
+
+    calculate_total_liquidity(quote_currency, total_value)
+    print(f"Your total Liquidity is {total_value["Liquidity"]["Total"]} {quote_currency}.")
+
+    total_value["Total"] += total_value["Liquidity"]["Total"]
+
+    print(f"Your Net Worth is {total_value["Total"]} {quote_currency}.")
+
+    # plot thes percentage of each asset
+    # plot_percentage(total_value)
+
+    return total_value["Total"]

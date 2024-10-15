@@ -25,10 +25,10 @@ def get_latest_price(ticker):
         print(f"Error fetching data for {ticker}: {e}")
         return None
 
-def check_cuantity(ticker):
+def check_cuantity(ticker, asset_type):
     """Returns the amount of a given ticker in the portfolio, or 0 if not found."""
     try:
-        return load_portfolio_json()[ticker]
+        return load_portfolio_json()[asset_type][ticker]
     except Exception as e:
         print(f"Ticker '{ticker}' is not in your portfolio.")
         return 0

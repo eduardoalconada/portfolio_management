@@ -6,21 +6,30 @@ CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CNH"]
 LIQUIDITY_FILE_PATH = 'assets/liquidity.json'
 
 
-def calculate_total_liquidity(quote_currency):
-
+def calculate_total_liquidity(quote_currency, total_value_dict):
+    """
+    Calculates the total liquidity value in the specified quote currency.
+    """
     total_liquidity = 0
 
-    liquidity = load_liquidity_json()
+    liquidity_dict = load_liquidity_json()
 
-    for currency, amount in liquidity.items():
-        if currency.startswith('LIQ-') and amount > 0:
-            currency = currency[4:]
-            print(currency)
-            print(quote_currency)
-            pairity = pair(currency, quote_currency)
-            total_liquidity += amount*pairity
+    for currency, amount in liquidity_dict.items():
+        if not currency.startswith("LIQ-") or amount <= 0:
+            continue
 
-    return round(total_liquidity, 2)
+        pairity = pair(currency[4:], quote_currency)
+        if pairity is None:
+            continue
+
+        total_currency = round(amount * pairity, 2)
+        total_liquidity += total_currency
+        total_value_dict["Liquidity"][currency] = total_currency
+
+    total_value_dict["Liquidity"]["Total"] = total_liquidity
+
+    return total_value_dict
+
 
 def check_liquidity_available(currency):
     try:

@@ -6,6 +6,7 @@ from fetch_item import search_asset
 
 
 action = None
+# update_json_files()
 while action != 'e':
     action = input("""Which action you want to do:
                         \tUpdate an asset (c)   
@@ -20,14 +21,14 @@ while action != 'e':
         while asset != "exit" and asset != "e" and asset != 'q':
             asset = input().lower()
             if asset == "commodity":
-                item_name, ticker = search_asset('assets\commodities.json')
-                update_asset(item_name, ticker)
+                item_name, ticker = search_asset('assets/commodities.json')
+                update_asset(item_name, ticker, "Commodities")
             elif asset == "crypto":
-                item_name, ticker = search_asset('assets\crypto.json')
-                update_asset(item_name, ticker)
+                item_name, ticker = search_asset('assets/crypto.json')
+                update_asset(item_name, ticker, "Crypto")
             elif asset == "shares":
-                item_name, ticker = search_asset('assets\shares.json')
-                update_asset(item_name, ticker)
+                item_name, ticker = search_asset('assets/shares.json')
+                update_asset(item_name, ticker, "Shares")
             else:
                 print("Type commodity, crypto or shares. If you want to exit type 'exit', 'e' or 'q'")
 
