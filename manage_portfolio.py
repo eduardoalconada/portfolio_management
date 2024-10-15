@@ -3,6 +3,7 @@
 import yfinance as yf
 import json
 import time
+from portfolio_class import Portfolio
 from manage_assets import check_cuantity, get_latest_price, load_portfolio_json, check_price
 from manage_liquidity import check_liquidity_available, load_liquidity_json, save_liquidity_data, pair, calculate_total_liquidity, display_currency_options
 
@@ -173,48 +174,20 @@ def calculate_total_value():
         total_item: the total value of an item (an asset)
     """
     quote_currency = input("In which currency do you want to calculate your total value? (EUR, USD, GBP, JPY, CHF, CNH) ").upper()
-    total_value = {
-    "Commodities": {},
-    "Shares": {},
-    "Crypto": {},
-    "Liquidity": {},
-    "Total": 0
-}
-    portfolio = load_portfolio_json()
 
-    # Iterate over each asset type (e.g., 'stocks', 'crypto')
-    for asset_type, assets in portfolio.items():
-        
+    portfolio_json = load_portfolio_json()
+    liquidity_json = load_liquidity_json()
 
-        total_type = 0
+    portfolio = Portfolio(quote_currency, portfolio_json, liquidity_json)
 
-        # Iterate over each item in the asset type
-        for ticker, quantity in assets.items():
-            price = check_price(ticker, quote_currency)
+    display_yes_no = input("Do you want to display the total value of your portfolio? (y/n)").lower()
 
-            if price is None:
-                print(f"Error retrieving price for {ticker}.")
-                continue
+    if display_yes_no == 'y':
+        portfolio.display()
 
-            # The total value of an item is calculated and summed to the total value of the asset type
-            total_item = quantity * price
-            total_type += total_item
+    plot_yes_no = input("Do you want to plot your portfolio? (y/n)").lower()
 
-            total_value[asset_type][ticker] = round(total_item, 2)
-        total_value[asset_type]["Total"] = round(total_type, 2)
-        print(f"Your total value of your {asset_type} is {round(total_type, 2)} {quote_currency}.")
-        total_value["Total"] += round(total_type, 2)
-
-    print(f"Your total value of your Assets is {total_value["Total"]} {quote_currency}.")
-
-    calculate_total_liquidity(quote_currency, total_value)
-    print(f"Your total Liquidity is {total_value["Liquidity"]["Total"]} {quote_currency}.")
-
-    total_value["Total"] += total_value["Liquidity"]["Total"]
-
-    print(f"Your Net Worth is {total_value["Total"]} {quote_currency}.")
-
-    # plot thes percentage of each asset
-    # plot_percentage(total_value)
+    if plot_yes_no == 'y':
+        portfolio.plot_portfolio()
 
     return total_value["Total"]
