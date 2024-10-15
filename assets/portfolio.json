@@ -1,5 +1,11 @@
 {
-    "MSFT": 89.38906,
-    "GC=F": 93.9,
-    "BTC-USD": 3.21039
+    "Commodities": {
+        "GC=F": 7.8419
+    },
+    "Shares": {
+        "MSFT": 23.89
+    },
+    "Crypto": {
+        "BTC-USD": 1.0
+    }
 }
