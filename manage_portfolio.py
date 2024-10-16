@@ -188,6 +188,5 @@ def calculate_total_value():
     plot_yes_no = input("Do you want to plot your portfolio? (y/n)").lower()
 
     if plot_yes_no == 'y':
-        portfolio.plot_portfolio()
+        portfolio.create_interactive_sunburst()
 
-    return total_value["Total"]

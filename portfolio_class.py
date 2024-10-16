@@ -111,56 +111,76 @@ class Portfolio:
         print(separator)
 
 
-    def plot_portfolio(self):
-        # Calculate the total portfolio value
-        total_portfolio_value = (
-            self.commoditties["Total"]
-            + self.shares["Total"]
-            + self.crypto["Total"]
-            + self.liquidity["Total"]
-        )
 
-        # Calculate percentage for each asset type
-        asset_types = ['Commodities', 'Shares', 'Crypto', 'Liquidity']
-        values = [
-            self.commoditties["Total"], 
-            self.shares["Total"], 
-            self.crypto["Total"], 
-            self.liquidity["Total"]
-        ]
-        percentages = [(value / total_portfolio_value) * 100 for value in values]
+    def get_sunburst_data(self):
+        labels = []
+        parents = []
+        values = []
         
-        # Create labels with percentages
-        labels = [f"{asset_type}: {round(percentage, 2)}%" for asset_type, percentage in zip(asset_types, percentages)]
+        # Commodities
+        for ticker, value in self.commoditties.items():
+            if ticker == "Total":
+                labels.append("Commodities")
+                parents.append("")
+                values.append(value)
+            else:
+                labels.append(ticker)
+                parents.append("Commodities")
+                values.append(value)
         
-        # Prepare hover text for each asset type
-        hover_texts = {
-            "Commodities": [f"{item}: {value} {self.quote_currency}" for item, value in self.commoditties.items() if item != 'Total'],
-            "Shares": [f"{item}: {value} {self.quote_currency}" for item, value in self.shares.items() if item != 'Total'],
-            "Crypto": [f"{item}: {value} {self.quote_currency}" for item, value in self.crypto.items() if item != 'Total'],
-            "Liquidity": [f"{item}: {value} {self.quote_currency}" for item, value in self.liquidity.items() if item != 'Total']
-        }
+        # Shares
+        for ticker, value in self.shares.items():
+            if ticker == "Total":
+                labels.append("Shares")
+                parents.append("")
+                values.append(value)
+            else:
+                labels.append(ticker)
+                parents.append("Shares")
+                values.append(value)
         
-        # Create the Plotly Pie chart
-        fig = go.Figure(
-            go.Pie(
-                labels=asset_types,
-                values=values,
-                hoverinfo='label+percent',  # Initial hover info
-                textinfo='percent',
-                marker=dict(line=dict(color='#000000', width=2)),
-                hole=0.4,  # Donut chart style
-                customdata=[hover_texts["Commodities"], hover_texts["Shares"], hover_texts["Crypto"], hover_texts["Liquidity"]],
-                hovertemplate='%{label}: %{percent}<br>%{customdata}<extra></extra>'  # Custom hover template for item details
+        # Crypto
+        for ticker, value in self.crypto.items():
+            if ticker == "Total":
+                labels.append("Crypto")
+                parents.append("")
+                values.append(value)
+            else:
+                labels.append(ticker)
+                parents.append("Crypto")
+                values.append(value)
+        
+        # Liquidity
+        for currency, value in self.liquidity.items():
+            if currency == "Total":
+                labels.append("Liquidity")
+                parents.append("")
+                values.append(value)
+            else:
+                labels.append(currency)
+                parents.append("Liquidity")
+                values.append(value)
+
+        return labels, parents, values
+
+    def create_interactive_sunburst(self):
+        labels, parents, values = self.get_sunburst_data()
+        
+        fig = go.Figure(go.Sunburst(
+            labels=labels,
+            parents=parents,
+            values=values,
+            branchvalues="total",
+            hovertemplate='<b>%{label}</b><br>Value: %{value:.2f} ' + self.quote_currency + '<br>Percentage: %{percentRoot:.2%}<extra></extra>'
+        ))
+        
+        fig.update_layout(
+            title="Interactive Portfolio Sunburst Chart",
+            hoverlabel=dict(
+                bgcolor="white",
+                font_size=12,
+                font_family="Rockwell"
             )
         )
         
-        # Set the title and layout
-        fig.update_layout(
-            title_text=f'Portfolio Breakdown by Asset Type ({self.quote_currency})',
-            annotations=[dict(text='Portfolio', x=0.5, y=0.5, font_size=20, showarrow=False)],
-            showlegend=True
-        )
-        
-        # Show the plot
         fig.show()
