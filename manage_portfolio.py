@@ -18,7 +18,7 @@ def save_portfolio_data(portfolio_data):
         with open(PORTFOLIO_FILE_PATH, 'w') as file:
             json.dump(portfolio_data, file, indent=4)
     except IOError:
-        print(f"Error writing to {portfolio_file}.")
+        print(f"Error writing to {PORTFOLIO_FILE_PATH}.")
         
 
 
